@@ -1,0 +1,24 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: wf-shardingsphere
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: DEFAULT_GROUP
+        namespace: eb1d20cd-d0be-4758-8735-c1f5e14a8891
+        refresh:
+          enabled: true
+      discovery:
+        namespace: eb1d20cd-d0be-4758-8735-c1f5e14a8891
+        server-addr: 127.0.0.1:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+logging:
+  config: classpath:config/logback.xml
+
+ 

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wf.shardingsphere.dao.SysUserDao">
+
+    <resultMap type="com.wf.shardingsphere.entity.SysUser" id="SysUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="OTHER"/>
+        <result property="updateTime" column="update_time" jdbcType="OTHER"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="deleteFlag" column="delete_flag" jdbcType="OTHER"/>
+        <result property="posCode" column="pos_code" jdbcType="VARCHAR"/>
+        <result property="disableFlag" column="disable_flag" jdbcType="OTHER"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="deptCode" column="dept_code" jdbcType="VARCHAR"/>
+        <result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
+        <result property="tenant" column="tenant" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysUserMap">
+        select
+          id, create_time, update_time, create_user, update_user, delete_flag, pos_code, disable_flag, avatar, email, password, user_name, real_name, dept_code, user_phone, tenant
+        from tenant_1.sys_user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysUserMap">
+        select
+          id, create_time, update_time, create_user, update_user, delete_flag, pos_code, disable_flag, avatar, email, password, user_name, real_name, dept_code, user_phone, tenant
+        from tenant_1.sys_user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysUserMap">
+        select
+          id, create_time, update_time, create_user, update_user, delete_flag, pos_code, disable_flag, avatar, email, password, user_name, real_name, dept_code, user_phone, tenant
+        from tenant_1.sys_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="deleteFlag != null">
+                and delete_flag = #{deleteFlag}
+            </if>
+            <if test="posCode != null and posCode != ''">
+                and pos_code = #{posCode}
+            </if>
+            <if test="disableFlag != null">
+                and disable_flag = #{disableFlag}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="realName != null and realName != ''">
+                and real_name = #{realName}
+            </if>
+            <if test="deptCode != null and deptCode != ''">
+                and dept_code = #{deptCode}
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                and user_phone = #{userPhone}
+            </if>
+            <if test="tenant != null and tenant != ''">
+                and tenant = #{tenant}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tenant_1.sys_user(create_time, update_time, create_user, update_user, delete_flag, pos_code, disable_flag, avatar, email, password, user_name, real_name, dept_code, user_phone, tenant)
+        values (#{createTime}, #{updateTime}, #{createUser}, #{updateUser}, #{deleteFlag}, #{posCode}, #{disableFlag}, #{avatar}, #{email}, #{password}, #{userName}, #{realName}, #{deptCode}, #{userPhone}, #{tenant})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tenant_1.sys_user
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag},
+            </if>
+            <if test="posCode != null and posCode != ''">
+                pos_code = #{posCode},
+            </if>
+            <if test="disableFlag != null">
+                disable_flag = #{disableFlag},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="realName != null and realName != ''">
+                real_name = #{realName},
+            </if>
+            <if test="deptCode != null and deptCode != ''">
+                dept_code = #{deptCode},
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                user_phone = #{userPhone},
+            </if>
+            <if test="tenant != null and tenant != ''">
+                tenant = #{tenant},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tenant_1.sys_user where id = #{id}
+    </delete>
+
+
+    <sql id="Base_Column_List">
+            `create_time`,
+            `update_time`,
+            `create_user`,
+            `update_user`,
+            `delete_flag`,
+            `pos_code`,
+            `disable_flag`,
+            `avatar`,
+            `email`,
+            `password`,
+            `user_name`,
+            `real_name`,
+            `dept_code`,
+            `user_phone`,
+            `tenant`
+        </sql>
+
+    <!--新增所有列-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO sys_user (
+        <include refid="Base_Column_List"/>
+        )
+        VALUES
+        <foreach collection="list" item="obj" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                NOW(),
+                NOW(),
+                #{obj.createUser},
+                #{obj.updateUser},
+                false,
+                #{obj.posCode},
+                false,
+                #{obj.avatar},
+                #{obj.email},
+                #{obj.password},
+                #{obj.userName},
+                #{obj.realName},
+                #{obj.deptCode},
+                #{obj.userPhone},
+                #{obj.tenant}
+            </trim>
+        </foreach>
+    </insert>
+
+    <select id="getUserUnionCommonByTenant" resultMap="SysUserMap">
+
+        select
+        sys.`id`,
+        sys.`create_time` as createTime,
+        sys.`update_time` as updateTime,
+        sys.`create_user` as createUser,
+        sys.`update_user` as updateUser,
+        sys.`delete_flag` as deleteFlag,
+        sys.`pos_code` as posCode,
+        sys.`disable_flag` as disableFlag,
+        sys.`avatar` ,
+        sys.`email`,
+        sys.`password`,
+        sys.`user_name` as userName,
+        sys.`real_name` as realName,
+        sys.`dept_code` as deptCode,
+        sys.`user_phone` as userPhone,
+        sys.`tenant`
+        from sys_user sys inner join sys_user_common com on sys.user_name = com.user_name
+        <where>
+            and sys.user_name =#{username} and sys.tenant=#{tenant}
+        </where>
+    </select>
+
+    <select id="getUserUnionByUserName" resultMap="SysUserMap">
+
+        select
+        sys.`id`,
+        sys.`create_time` as createTime,
+        sys.`update_time` as updateTime,
+        sys.`create_user` as createUser,
+        sys.`update_user` as updateUser,
+        sys.`delete_flag` as deleteFlag,
+        sys.`pos_code` as posCode,
+        sys.`disable_flag` as disableFlag,
+        sys.`avatar` ,
+        sys.`email`,
+        sys.`password`,
+        sys.`user_name` as userName,
+        sys.`real_name` as realName,
+        sys.`dept_code` as deptCode,
+        sys.`user_phone` as userPhone,
+        sys.`tenant`
+        from sys_user sys inner join sys_user_union com on sys.user_name = com.user_name
+        <where>
+            and sys.user_name =#{username} and sys.tenant=#{tenant}
+        </where>
+    </select>
+
+    <select id="getUserUnionCommon" resultMap="SysUserMap">
+        select
+        sys.`id`,
+        sys.`create_time` as createTime,
+        sys.`update_time` as updateTime,
+        sys.`create_user` as createUser,
+        sys.`update_user` as updateUser,
+        sys.`delete_flag` as deleteFlag,
+        sys.`pos_code` as posCode,
+        sys.`disable_flag` as disableFlag,
+        sys.`avatar` ,
+        sys.`email`,
+        sys.`password`,
+        sys.`user_name` as userName,
+        sys.`real_name` as realName,
+        sys.`dept_code` as deptCode,
+        sys.`user_phone` as userPhone,
+        sys.`tenant`
+        from sys_user sys inner join sys_user_common com on sys.user_name = com.user_name
+        <where>
+            and sys.user_name =#{username} and sys.id=#{id}
+        </where>
+    </select>
+</mapper>
